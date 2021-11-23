@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using XykChat.Data;
 using XykChat.Models.RoomModels;
 
@@ -19,7 +20,7 @@ namespace XykChat.Services
             _userID = userID;
         }
 
-        public bool CreateRoom(RoomCreate model)
+        public bool Create(RoomCreate model)
         {
             Room entity = new Room
             {
@@ -32,6 +33,35 @@ namespace XykChat.Services
             _context.Rooms.Add(entity);
 
             return _context.SaveChanges() == 1;
+        }
+
+        public IEnumerable<RoomListItem> GetRooms()
+        {
+            var user = _context
+                .Members
+                .Where(e => e.UserID == _userID);
+
+            var member = new Member();
+
+            foreach(Member m in user)
+            {
+                member = m;
+            }
+
+            return member
+                .Rooms
+                .Select
+                (
+                    e =>
+                        new RoomListItem
+                        {
+                            ID = e.ID,
+                            Name = e.Name,
+                            Description = e.Description,
+                            CreatedUtc = e.CreatedUtc
+                        }
+                )
+                .ToArray();
         }
     }
 }

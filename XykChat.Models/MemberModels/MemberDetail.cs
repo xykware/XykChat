@@ -18,5 +18,9 @@ namespace XykChat.Models.MemberModels
         public ICollection<Room> Rooms { get; set; }
 
         public ICollection<Member> Friends { get; set; }
+
+        public DateTimeOffset CreatedUtc { get; set; }
+
+        public DateTimeOffset? ModifiedUtc { get; set; }
     }
 }

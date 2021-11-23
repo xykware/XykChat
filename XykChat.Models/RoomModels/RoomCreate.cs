@@ -9,15 +9,11 @@ namespace XykChat.Models.RoomModels
 {
     public class RoomCreate
     {
+        public int ID { get; set; }
+
         [Required]
         public string Name { get; set; }
 
         public string Description { get; set; }
-
-        [Required]
-        public Guid OwnerID { get; set; }
-
-        [Required]
-        public DateTimeOffset CreatedUtc { get; set; }
     }
 }

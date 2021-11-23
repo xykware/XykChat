@@ -19,6 +19,8 @@ namespace XykChat.Models.RoomModels
 
         public virtual ICollection<Channel> Channels { get; set; } = new List<Channel>();
 
+        public virtual ICollection<Member> Members { get; set; } = new List<Member>();
+
         public DateTimeOffset CreatedUtc { get; set; }
 
         public DateTimeOffset? ModifiedUtc { get; set; }

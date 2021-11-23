@@ -19,8 +19,13 @@ namespace XykChat.Data
         [Required]
         public Guid UserID { get; set; }
 
-        public ICollection<Room> Rooms { get; set; } = new List<Room>();
+        public virtual ICollection<Room> Rooms { get; set; } = new List<Room>();
 
-        public ICollection<Member> Friends { get; set; } = new List<Member>();
+        public virtual ICollection<Member> Friends { get; set; } = new List<Member>();
+
+        [Required]
+        public DateTimeOffset CreatedUtc { get; set; }
+
+        public DateTimeOffset? ModifiedUtc { get; set; }
     }
 }

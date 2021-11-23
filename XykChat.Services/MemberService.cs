@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using XykChat.Data;
 using XykChat.Models.MemberModels;
+using XykChat.Models.RoomModels;
 
 namespace XykChat.Services
 {
@@ -24,36 +25,60 @@ namespace XykChat.Services
             Member entity = new Member
             {
                 Name = model.Name,
-                UserID = _userID
+                UserID = _userID,
+                CreatedUtc = DateTimeOffset.Now
             };
 
-            _context.Members.Add(entity);
+            var user = _context
+                .Members
+                .Where(e => e.UserID == _userID)
+                .ToList();
+
+            int count = 0;
+
+            foreach (Member m in user)
+            {
+                count++;
+            }
+
+            if (count == 0)
+            {
+                _context.Members.Add(entity);
+            }
 
             return _context.SaveChanges() == 1;
         }
 
-        public ICollection<Room> GetRooms()
+        public IEnumerable<MemberRoomList> GetRooms()
         {
-            return (ICollection<Room>)_context
+            return _context
                     .Members
                     .Where(e => e.UserID == _userID)
                     .Select
                     (
                         e =>
-                        e.Rooms
-                    );
+                            new MemberRoomList
+                            {
+                                Rooms = e.Rooms
+                            }
+                    )
+                    .ToArray();
         }
 
-        public ICollection<Member> GetFriends()
+        public IEnumerable<MemberFriendList> GetFriends()
         {
-            return (ICollection<Member>)_context
+            return _context
                     .Members
                     .Where(e => e.UserID == _userID)
                     .Select
                     (
                         e =>
-                        e.Friends
-                    );
+                            new MemberFriendList
+                            {
+                                Friends = e.Friends
+                            }
+                    )
+                    .ToArray();
         }
 
         public bool AddRoom(int id)
@@ -62,14 +87,71 @@ namespace XykChat.Services
                 .Rooms
                 .Find(id);
 
-            var member = _context
+            var user = _context
                 .Members
                 .Where(e => e.UserID == _userID)
                 .ToList();
 
-            foreach(Member m in member)
+            foreach(Member m in user)
             {
                 m.Rooms.Add(room);
+            }
+
+            return _context.SaveChanges() == 1;
+        }
+
+        public bool AddFriend(int id)
+        {
+            var friend = _context
+                .Members
+                .Find(id);
+
+            var user = _context
+                .Members
+                .Where(e => e.UserID == _userID)
+                .ToList();
+
+            foreach (Member m in user)
+            {
+                m.Friends.Add(friend);
+            }
+
+            return _context.SaveChanges() == 1;
+        }
+
+        public bool RemoveRoom(int id)
+        {
+            var room = _context
+                .Rooms
+                .Find(id);
+
+            var user = _context
+                .Members
+                .Where(e => e.UserID == _userID)
+                .ToList();
+
+            foreach (Member m in user)
+            {
+                m.Rooms.Remove(room);
+            }
+
+            return _context.SaveChanges() == 1;
+        }
+
+        public bool RemoveFriend(int id)
+        {
+            var friend = _context
+                .Members
+                .Find(id);
+
+            var user = _context
+                .Members
+                .Where(e => e.UserID == _userID)
+                .ToList();
+
+            foreach (Member m in user)
+            {
+                m.Friends.Remove(friend);
             }
 
             return _context.SaveChanges() == 1;

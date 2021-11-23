@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using XykChat.Data;
+using XykChat.Models.MemberModels;
+using XykChat.Services;
 using XykChat.WebMVC.Models;
 
 namespace XykChat.WebMVC.Controllers
@@ -156,6 +158,16 @@ namespace XykChat.WebMVC.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    var userID = Guid.Parse(user.Id);
+                    var service = new MemberService(userID);
+                    var member = new MemberCreate()
+                    {
+                        Name = model.Email,
+                        UserID = userID,
+                        CreatedUtc = DateTimeOffset.Now
+                    };
+                    service.Create(member);
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

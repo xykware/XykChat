@@ -9,10 +9,16 @@ namespace XykChat.Models.MemberModels
 {
     public class MemberCreate
     {
+        [Key]
+        public int ID { get; set; }
+
         [Required]
         public string Name { get; set; }
 
         [Required]
         public Guid UserID { get; set; }
+
+        [Required]
+        public DateTimeOffset CreatedUtc { get; set; }
     }
 }
