@@ -40,6 +40,8 @@ namespace XykChat.Data
 
         public DbSet<Member> Members { get; set; }
 
+        public DbSet<Relationship> Relationships { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder

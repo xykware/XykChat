@@ -22,7 +22,7 @@ namespace XykChat.Services
 
         public bool Create(RoomCreate model)
         {
-            Room entity = new Room
+            var room = new Room
             {
                 Name = model.Name,
                 Description = model.Description,
@@ -30,38 +30,56 @@ namespace XykChat.Services
                 CreatedUtc = DateTimeOffset.Now
             };
 
-            _context.Rooms.Add(entity);
+            _context.Rooms.Add(room);
+            _context.SaveChanges();
+
+            var roomResult = _context
+                .Rooms
+                .Where(e => e.OwnerID == _userID)
+                .ToList()
+                .Last();
+
+            var relationship = new Relationship
+            {
+                UserID = _userID,
+                RoomID = roomResult.ID
+            };
+
+            _context.Relationships.Add(relationship);
 
             return _context.SaveChanges() == 1;
         }
 
         public IEnumerable<RoomListItem> GetRooms()
         {
-            var user = _context
-                .Members
-                .Where(e => e.UserID == _userID);
+            var relationships = _context
+                .Relationships
+                .Where(e => e.UserID == _userID && e.RoomID != null)
+                .ToList();
 
-            var member = new Member();
+            List<RoomListItem> roomList = new List<RoomListItem>(); 
 
-            foreach(Member m in user)
+            foreach(Relationship r in relationships)
             {
-                member = m;
-            }
+                var room = _context
+                    .Rooms
+                    .Where(e => e.ID == r.RoomID)
+                    .ToList()
+                    .Single();
 
-            return member
-                .Rooms
-                .Select
-                (
-                    e =>
+                roomList.Add
+                    (
                         new RoomListItem
                         {
-                            ID = e.ID,
-                            Name = e.Name,
-                            Description = e.Description,
-                            CreatedUtc = e.CreatedUtc
+                            ID = room.ID,
+                            Name = room.Name,
+                            Description = room.Description,
+                            CreatedUtc = room.CreatedUtc
                         }
-                )
-                .ToArray();
+                    );
+            }
+
+            return roomList.ToArray();
         }
     }
 }

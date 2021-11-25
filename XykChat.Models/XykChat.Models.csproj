@@ -77,6 +77,8 @@
     <Compile Include="MemberModels\MemberFriendList.cs" />
     <Compile Include="MemberModels\MemberRoomList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RelationshipModels\RelationshipAddFriend.cs" />
+    <Compile Include="RelationshipModels\RelationshipAddRoom.cs" />
     <Compile Include="RoomModels\RoomCreate.cs" />
     <Compile Include="RoomModels\RoomDetail.cs" />
     <Compile Include="RoomModels\RoomListItem.cs" />

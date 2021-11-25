@@ -22,6 +22,11 @@ namespace XykChat.WebMVC.Controllers
             return View(model);
         }
 
+        public ActionResult Create()
+        {
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(RoomCreate model)

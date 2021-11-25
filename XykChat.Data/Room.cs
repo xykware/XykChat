@@ -22,8 +22,6 @@ namespace XykChat.Data
 
         public virtual ICollection<Channel> Channels { get; set; } = new List<Channel>();
 
-        public virtual ICollection<Member> Members { get; set; } = new List<Member>();
-
         [Required]
         public DateTimeOffset CreatedUtc { get; set; }
 

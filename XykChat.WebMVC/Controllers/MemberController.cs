@@ -12,16 +12,6 @@ namespace XykChat.WebMVC.Controllers
     [Authorize]
     public class MemberController : Controller
     {
-        // GET: Member
-        public ActionResult Index()
-        {
-            var userID = Guid.Parse(User.Identity.GetUserId());
-            var service = new MemberService(userID);
-            var model = service.GetRooms();
-
-            return View(model);
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(MemberCreate model)
