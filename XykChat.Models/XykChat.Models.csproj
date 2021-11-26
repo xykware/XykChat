@@ -72,6 +72,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChannelModels\ChannelCreate.cs" />
+    <Compile Include="ChannelModels\ChannelListItem.cs" />
     <Compile Include="MemberModels\MemberCreate.cs" />
     <Compile Include="MemberModels\MemberDetail.cs" />
     <Compile Include="MemberModels\MemberFriendList.cs" />
@@ -81,13 +83,13 @@
     <Compile Include="RelationshipModels\RelationshipAddRoom.cs" />
     <Compile Include="RoomModels\RoomCreate.cs" />
     <Compile Include="RoomModels\RoomDetail.cs" />
+    <Compile Include="RoomModels\RoomJoin.cs" />
     <Compile Include="RoomModels\RoomListItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ChannelModels\" />
     <Folder Include="MessageModels\" />
   </ItemGroup>
   <ItemGroup>

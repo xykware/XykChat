@@ -17,6 +17,8 @@ namespace XykChat.Data
 
         public string Description { get; set; }
 
+        public string Password { get; set; }
+
         [Required]
         public Guid OwnerID { get; set; }
 

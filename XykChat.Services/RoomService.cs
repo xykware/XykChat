@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using XykChat.Data;
+using XykChat.Models.ChannelModels;
 using XykChat.Models.RoomModels;
 
 namespace XykChat.Services
@@ -80,6 +81,93 @@ namespace XykChat.Services
             }
 
             return roomList.ToArray();
+        }
+
+        public IEnumerable<ChannelListItem> GetRoomChannels(int roomID)
+        {
+            var relationships = _context
+                .Relationships
+                .Where(e => e.UserID == _userID && e.RoomID == roomID)
+                .ToList();
+
+            List<ChannelListItem> channelList = new List<ChannelListItem>();
+
+            foreach (Relationship r in relationships)
+            {
+                var channels = _context
+                    .Channels
+                    .Where(e => e.RoomID == r.RoomID)
+                    .ToList();
+
+                foreach (Channel c in channels)
+                {
+                    channelList.Add
+                        (
+                            new ChannelListItem
+                            {
+                                ID = c.ID,
+                                Name = c.Name,
+                                RoomID = c.RoomID,
+                                CreatedUtc = c.CreatedUtc
+                            }
+                        );
+                }
+            }
+
+            return channelList.ToArray();
+        }
+
+        public bool AddRoomChannel(ChannelCreate model, int roomID)
+        {
+            var room = _context
+                .Rooms
+                .Where(e => e.OwnerID == _userID && e.ID == roomID)
+                .ToList()
+                .Single();
+
+            var channel = new Channel
+            {
+                Name = model.Name,
+                RoomID = room.ID,
+                CreatedUtc = DateTimeOffset.Now
+            };
+
+            _context.Channels.Add(channel);
+            return _context.SaveChanges() == 1;
+        }
+
+        public bool JoinRoom(RoomJoin model, int roomID)
+        {
+            var room = _context
+                .Rooms
+                .Where(e => e.ID == roomID)
+                .ToList()
+                .Single();
+
+            if(room.Password != model.Password)
+            {
+                return false;
+            }
+
+            var relationshipList = _context
+                .Relationships
+                .Where(e => e.UserID == _userID && e.RoomID == roomID)
+                .ToList();
+
+            if(relationshipList.Count > 0)
+            {
+                return false;
+            }
+
+            var relationship = new Relationship
+            {
+                UserID = _userID,
+                RoomID = room.ID
+            };
+
+            _context.Relationships.Add(relationship);
+
+            return _context.SaveChanges() == 1;
         }
     }
 }

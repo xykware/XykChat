@@ -238,6 +238,9 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Room\Index.cshtml" />
     <Content Include="Views\Room\Create.cshtml" />
+    <Content Include="Views\Room\View.cshtml" />
+    <Content Include="Views\Room\AddChannel.cshtml" />
+    <Content Include="Views\Room\Join.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

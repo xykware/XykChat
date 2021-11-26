@@ -5,17 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XykChat.Models.RoomModels
+namespace XykChat.Models.ChannelModels
 {
-    public class RoomCreate
+    public class ChannelCreate
     {
         public int ID { get; set; }
 
         [Required]
         public string Name { get; set; }
-
-        public string Description { get; set; }
-
-        public string Password { get; set; }
     }
 }

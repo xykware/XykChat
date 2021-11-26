@@ -16,6 +16,7 @@ namespace XykChat.Data
         [Required]
         public string Name { get; set; }
 
+        [Required]
         [ForeignKey(nameof(Room))]
         public int RoomID { get; set; }
 
