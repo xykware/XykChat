@@ -99,6 +99,10 @@
     <Compile Include="Migrations\202111260227346_added_RoomJoin.Designer.cs">
       <DependentUpon>202111260227346_added_RoomJoin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202111271828300_updated_member.cs" />
+    <Compile Include="Migrations\202111271828300_updated_member.Designer.cs">
+      <DependentUpon>202111271828300_updated_member.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Relationship.cs" />
@@ -123,6 +127,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202111260227346_added_RoomJoin.resx">
       <DependentUpon>202111260227346_added_RoomJoin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111271828300_updated_member.resx">
+      <DependentUpon>202111271828300_updated_member.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

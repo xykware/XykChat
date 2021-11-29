@@ -7,14 +7,12 @@ using System.Threading.Tasks;
 
 namespace XykChat.Models.MemberModels
 {
-    public class MemberCreate
+    public class MemberEdit
     {
+        [Key]
         public Guid UserID { get; set; }
 
         [Required]
         public string Name { get; set; }
-
-        [Required]
-        public DateTimeOffset CreatedUtc { get; set; }
     }
 }

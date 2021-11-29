@@ -10,7 +10,11 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 body {
-  margin: 0;
+    background-color: #000000 !important;
+    background-image: url("bg.gif") !important;
+    background-repeat: repeat-y repeat-x !important;
+    color: #000000 !important;
+    margin: 0;
 }
 article,
 aside,
@@ -44,6 +48,7 @@ template {
 }
 a {
   background-color: transparent;
+  color: #000000 !important;
 }
 a:active,
 a:hover {
@@ -1581,10 +1586,15 @@ pre code {
   overflow-y: scroll;
 }
 .container {
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
+    background: #C0C0C0 !important;
+    border-width: 10px;
+    border-style: ridge;
+    border-color: #DDDDDD;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-bottom: 50px;
+    margin-right: auto;
+    margin-left: auto;
 }
 @media (min-width: 768px) {
   .container {

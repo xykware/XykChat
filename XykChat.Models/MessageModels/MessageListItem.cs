@@ -1,33 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using XykChat.Data;
 
-namespace XykChat.Data
+namespace XykChat.Models.MessageModels
 {
-    public class Message
+    public class MessageListItem
     {
-        [Key]
         public int ID { get; set; }
 
-        [Required]
         public string Content { get; set; }
 
-        [ForeignKey(nameof(Channel))]
         public int ChannelID { get; set; }
 
-        public virtual Channel Channel { get; set; }
-
-        [Required]
         [ForeignKey(nameof(Sender))]
         public Guid SenderID { get; set; }
 
         public virtual Member Sender { get; set; }
 
-        [Required]
         public DateTimeOffset CreatedUtc { get; set; }
 
         public DateTimeOffset? ModifiedUtc { get; set; }

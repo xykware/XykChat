@@ -51,6 +51,8 @@ namespace XykChat.WebMVC.Controllers
             var service = new RoomService(userID);
             var model = service.GetRoomChannels(id);
 
+            ViewBag.RoomID = id;
+
             return View(model);
         }
 
@@ -70,8 +72,9 @@ namespace XykChat.WebMVC.Controllers
             return RedirectToAction($"View/{id}");
         }
 
-        public ActionResult AddChannel()
+        public ActionResult AddChannel(int id)
         {
+            ViewBag.RoomID = id;
             return View();
         }
 
@@ -87,6 +90,8 @@ namespace XykChat.WebMVC.Controllers
             var userID = Guid.Parse(User.Identity.GetUserId());
             var service = new RoomService(userID);
             service.AddRoomChannel(model, id);
+
+            ViewBag.RoomID = id;
 
             return RedirectToAction($"View/{id}");
         }

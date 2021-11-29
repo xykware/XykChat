@@ -28,5 +28,27 @@ namespace XykChat.WebMVC.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public ActionResult Edit()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(MemberEdit model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var userID = Guid.Parse(User.Identity.GetUserId());
+            var service = new MemberService(userID);
+
+            service.Edit(model);
+
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

@@ -76,8 +76,11 @@
     <Compile Include="ChannelModels\ChannelListItem.cs" />
     <Compile Include="MemberModels\MemberCreate.cs" />
     <Compile Include="MemberModels\MemberDetail.cs" />
+    <Compile Include="MemberModels\MemberEdit.cs" />
     <Compile Include="MemberModels\MemberFriendList.cs" />
     <Compile Include="MemberModels\MemberRoomList.cs" />
+    <Compile Include="MessageModels\MessageCreate.cs" />
+    <Compile Include="MessageModels\MessageListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RelationshipModels\RelationshipAddFriend.cs" />
     <Compile Include="RelationshipModels\RelationshipAddRoom.cs" />
@@ -89,9 +92,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MessageModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\XykChat.Data\XykChat.Data.csproj">
       <Project>{E272D3D9-0FDF-4190-BAD5-43FD69D2C6EB}</Project>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,17 +35,22 @@ namespace XykChat.Services
                 .Where(e => e.UserID == _userID)
                 .ToList();
 
-            int count = 0;
-
-            foreach (Member m in user)
-            {
-                count++;
-            }
-
-            if (count == 0)
+            if (user.Count == 0)
             {
                 _context.Members.Add(entity);
             }
+
+            return _context.SaveChanges() == 1;
+        }
+
+        public bool Edit(MemberEdit model)
+        {
+            var user = _context
+                .Members
+                .Single(e => e.UserID == _userID);
+
+            user.Name = model.Name;
+            user.ModifiedUtc = DateTimeOffset.Now;
 
             return _context.SaveChanges() == 1;
         }

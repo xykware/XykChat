@@ -1,0 +1,27 @@
+﻿@model IEnumerable<XykChat.Models.MessageModels.MessageListItem>
+
+@{
+    ViewBag.Title = "Messages";
+}
+
+<h2>Messages</h2>
+
+<p>
+    @Html.ActionLink("Send Message", $"Index/{ViewBag.ChannelID}", "Message")
+</p>
+
+<table class="table">
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Content)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sender.Name)
+        </td>
+    </tr>
+}
+
+</table>

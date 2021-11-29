@@ -4,21 +4,15 @@
     ViewBag.Title = "View";
 }
 
-<h2>View</h2>
+<h2>Channels</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "AddChannel", new { id = ViewBag.RoomID })
 </p>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RoomID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedUtc)
         </th>
         <th></th>
     </tr>
@@ -26,18 +20,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RoomID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedUtc)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink($"{Html.DisplayFor(modelItem => item.Name)}", "Index", "Channel", new { id = item.ID }, null)
         </td>
     </tr>
 }

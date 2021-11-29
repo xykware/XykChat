@@ -11,13 +11,12 @@ namespace XykChat.Data
     public class Member
     {
         [Key]
-        public int ID { get; set; }
+        public Guid UserID { get; set; }
 
         [Required]
         public string Name { get; set; }
 
-        [Required]
-        public Guid UserID { get; set; }
+        public virtual ICollection<Message> Messages { get; set; }
 
         [Required]
         public DateTimeOffset CreatedUtc { get; set; }
