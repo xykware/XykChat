@@ -1,6 +1,10 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: #000000 !important;
+    background-image: url("bg.gif") !important;
+    background-repeat: repeat-y repeat-x !important;
+    color: #000000 !important;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -21,4 +25,18 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+.container {
+    background: #C0C0C0 !important;
+    border-width: 10px;
+    border-style: ridge;
+    border-color: #DDDDDD;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-bottom: 50px;
+}
+
+a {
+    color: #000000 !important;
 }
